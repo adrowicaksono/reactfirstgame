@@ -49,7 +49,7 @@ class Leaderboard extends React.Component {
             members: new_members
         })
     }
-
+    
     dice (event){
         let play_members = this.state.members
         let next = this.state.turn
@@ -57,15 +57,20 @@ class Leaderboard extends React.Component {
         let point = Math.ceil(Math.random()*6)
         let totPlay = play_members.length
 
-        if(next < totPlay ){
-            console.log(playerOnPlay, this.state.turn, point)
+       
+        if(next < totPlay){
+            // console.log(playerOnPlay, this.state.turn, point)
             playerOnPlay.score += point
-            next++
+            if(next < play_members.length-1){
+                next++
+            }
         } else {
             next = 0
         }
-
-
+        
+        if(playerOnPlay.score > 15){
+            playerOnPlay.score = 16
+        }
         this.setState({
             members : play_members,
             turn : next

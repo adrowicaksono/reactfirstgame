@@ -9,7 +9,12 @@ class Board extends React.Component {
         }
     }
 
+    mainBord = () => {
 
+        
+        
+       
+    }
 
     render () {
         const styles = {
@@ -38,25 +43,25 @@ class Board extends React.Component {
             <div style={styles.container}>
                 
                 {   
-
-                    this.props.size.map((piece) => {
-                        let onBlock = []
-                        this.state.player.forEach( el => {
-                            if(el.score === piece.block ){
-                                onBlock.push(el.name)
-                            }
-                        })              
-                    return (
-                            <div style={styles.pieces}>
-                                <p style={styles.self}>{piece.block}</p>
-                                {onBlock.map(name => {
-                                    return(
-                                       <p>{name}</p>  
-                                    )
-                                })}
-                            </div>
-                        )   
-                    })
+                  this.props.size.map((piece) => {
+                    let onBlock = []
+                    this.state.player.forEach( el => {
+                        if(el.score === piece.block ){
+                            onBlock.push(el.name)
+                        }
+                    })              
+                return (
+                        <div key={piece.id} style={styles.pieces}>
+                            <p style={styles.self}>{piece.block}</p>
+                            {onBlock.map(name => {
+                                return(
+                                   <p key={name}>{name}</p>  
+                                )
+                            })}
+                        </div>
+                    )   
+                })
+                   
                 }
             </div>   
         )
