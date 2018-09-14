@@ -5,16 +5,18 @@ class Board extends React.Component {
         super(props)
 
         this.state = {
-            player :this.props.members
+            player :this.props.members,
+            onBlock : [],
         }
     }
 
-    mainBord = () => {
-
-        
-        
-       
-    }
+    getWhoPlayerOntheBord = (players, block) => {
+        let onBoard = players.filter(el => {
+            return el.score === block
+        }) 
+        console.log('on function',onBoard)
+       return onBoard
+    }   
 
     render () {
         const styles = {
@@ -41,25 +43,25 @@ class Board extends React.Component {
         }
         return (
             <div style={styles.container}>
-                
                 {   
-                  this.props.size.map((piece) => {
-                    let onBlock = []
-                    this.state.player.forEach( el => {
-                        if(el.score === piece.block ){
-                            onBlock.push(el.name)
-                        }
-                    })              
-                return (
-                        <div key={piece.id} style={styles.pieces}>
-                            <p style={styles.self}>{piece.block}</p>
-                            {onBlock.map(name => {
-                                return(
-                                   <p key={name}>{name}</p>  
-                                )
-                            })}
-                        </div>
-                    )   
+                  
+                  this.props.size.map(  piece => {
+                    
+                    let onBlock = this.state.player.filter( el => {return el.score === piece.block})              
+                        
+                        return (
+                                <div key={piece.block} style={styles.pieces}>
+                                    
+                                    <p style={styles.self}>{piece.block}</p>
+                                    
+                                    {onBlock.map(player => {
+                                        return(
+                                        <p key={player.id}>{player.name}</p>  
+                                        )
+                                    })}
+
+                                </div>
+                        )   
                 })
                    
                 }
